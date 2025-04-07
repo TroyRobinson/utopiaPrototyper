@@ -1,12 +1,11 @@
 // OpenRouter API service
-// Store your API key in an .env file in the root directory as VITE_OPENROUTER_API_KEY=your_api_key_here
+// Store your API key using the localStorage.setItem('OPENROUTER_API_KEY', 'your_key_here') method
 // You can get your API key from https://openrouter.ai/keys
 
 const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
-// More compatible way to access environment variables
+// Access the API key from localStorage for Utopia compatibility
 const getApiKey = () => {
-  // Just use localStorage for simplicity
   try {
     // For browser development
     if (typeof localStorage !== 'undefined') {
@@ -23,19 +22,11 @@ const getApiKey = () => {
 
 export async function sendMessageToOpenRouter(messages) {
   try {
-    // First try the regular Vite way in a try/catch to avoid syntax errors
-    let apiKey = '';
-    try {
-      // @ts-ignore - Ignoring TypeScript error for import.meta
-      const env = import.meta.env;
-      apiKey = env.VITE_OPENROUTER_API_KEY;
-    } catch (e) {
-      // Fallback to our safer method
-      apiKey = getApiKey();
-    }
+    // Get API key from localStorage (Utopia-compatible)
+    const apiKey = getApiKey();
     
     if (!apiKey) {
-      throw new Error('OpenRouter API key is missing. Please add your API key to .env file as VITE_OPENROUTER_API_KEY=your_api_key_here or set it in localStorage');
+      throw new Error('OpenRouter API key is missing. Please set it using: localStorage.setItem("OPENROUTER_API_KEY", "your_api_key_here")');
     }
 
     const response = await fetch(OPENROUTER_API_URL, {
