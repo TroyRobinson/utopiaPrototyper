@@ -9,16 +9,32 @@ A chat interface that uses OpenRouter API to generate mini React applications ba
    ```
    npm install
    ```
-3. Create a `.env` file in the root directory with your OpenRouter API key:
+3. Add your OpenRouter API key using one of these methods:
+   
+   a) Create a `.env` file in the root directory:
    ```
    VITE_OPENROUTER_API_KEY=your_api_key_here
    ```
+   
+   b) Or set it in your browser's localStorage (useful for Utopia editor):
+   ```javascript
+   localStorage.setItem('OPENROUTER_API_KEY', 'your_api_key_here')
+   ```
+   
    Get your API key from https://openrouter.ai/keys
 
 4. Start the development server
    ```
    npm start
    ```
+
+## Using in Utopia Editor
+
+If you're opening this project in the Utopia editor (https://utopia.app), you may need to set the OpenRouter API key in localStorage using the browser console. This is because Utopia may not have access to environment variables from the .env file.
+
+1. Open the browser console in Utopia (F12 or right-click -> Inspect)
+2. Run: `localStorage.setItem('OPENROUTER_API_KEY', 'your_api_key_here')`
+3. Refresh the page
 
 ## How to Use
 
